@@ -13,7 +13,7 @@ import (
 // lastCmd represents the last command
 var lastCmd = &cobra.Command{
 	Use:   "last",
-	Short: "Print the last IP address in a subnet",
+	Short: "Print the last IP address in a subnet (CIDR notation)",
 	Long: `Print the last IP address in a subnet. e.g.:
   ipcalc last 192.168.178.0/24
   `,

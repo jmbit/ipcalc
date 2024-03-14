@@ -13,7 +13,7 @@ import (
 // firstCmd represents the first command
 var firstCmd = &cobra.Command{
 	Use:   "first",
-	Short: "Print the first IP address in a subnet",
+	Short: "Print the first IP address in a subnet (CIDR notation)",
 	Long: `Prints the first IP address in a subnet. e.g.:
   ipcalc first 192.168.170.0/24
   `,
