@@ -18,7 +18,8 @@ var broadcastCmd = &cobra.Command{
 	Use:   "broadcast",
 	Short: "Get the Broadcast address for a CIDR address",
 	Long: `this command returns the broadcast address for a given CIDR address. e.g.:
-  ipcalc broadcast 192.68.178.34/24
+  ipcalc broadcast 192.68.178.34/24.
+  Note: IPv6 has no network broadcast address.
   `,
 	Run: func(cmd *cobra.Command, args []string) {
 		_, network, err := net.ParseCIDR(args[0])
