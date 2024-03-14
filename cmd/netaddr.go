@@ -1,11 +1,11 @@
 /*
 Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
-	"fmt"
+	"log"
+	"net"
 
 	"github.com/spf13/cobra"
 )
@@ -13,15 +13,16 @@ import (
 // netaddrCmd represents the netaddr command
 var netaddrCmd = &cobra.Command{
 	Use:   "netaddr",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "returns the network address for a given CIDR address",
+	Long: `This command returns the network address for a given CIDR address. e.g.:
+  ipcalc netaddr 192.168.178.86/24`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("netaddr called")
+		_, network, err := net.ParseCIDR(args[0])
+		if err != nil {
+			log.Panic(err)
+			return
+		}
+		println(network.IP.String())
 	},
 }
 
