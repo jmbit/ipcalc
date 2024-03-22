@@ -14,7 +14,7 @@ func ipToBigInt(ip net.IP) *big.Int {
 	return ipBigInt
 }
 
-// Calculate the smallest subnet
+// Calculate the smallest subnet. Currently still has some weird edge cases
 func CalculateSmallestSubnet(ip1 net.IP, ip2 net.IP) (*net.IPNet, error) {
 	ip1BigInt := ipToBigInt(ip1)
 	ip2BigInt := ipToBigInt(ip2)
@@ -28,6 +28,7 @@ func CalculateSmallestSubnet(ip1 net.IP, ip2 net.IP) (*net.IPNet, error) {
 		diff.Rsh(diff, 1)
 		mask--
 	}
+
 	log.Println(ip1, mask)
 	_, cidr, err := net.ParseCIDR(fmt.Sprintf("%s/%d", ip1, mask))
 

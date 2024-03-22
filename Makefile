@@ -1,6 +1,6 @@
 
 PLATFORMS := linux darwin windows
-ARCHITECTURES := amd64 aarch64
+ARCHITECTURES := amd64 arm64
 APP_NAME := ipcalc
 
 
@@ -38,3 +38,5 @@ $(PLATFORMS):
 		done \
 	done
 
+docker:
+	docker build --output type=local,dest=release . 
