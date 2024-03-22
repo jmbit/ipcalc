@@ -1,21 +1,17 @@
 package maths
 
 import (
-	"encoding/binary"
 	"math/big"
 	"net"
 )
 
+// AddressCount calculates the number of IP addresses in a given network
 func AddressCount(network *net.IPNet) int {
+	ones, bits := network.Mask.Size()
+	numHosts := new(big.Int).Exp(big.NewInt(2), big.NewInt(int64(bits-ones)), nil)
 	if network.IP.To4() != nil {
-		first := binary.BigEndian.Uint32(GetFirstIPAddress(network))
-		last := binary.BigEndian.Uint32(GetLastIPAddress(network))
-		return int(last - first)
-	} else {
-		first := new(big.Int).SetBytes(GetFirstIPAddress(network))
-		last := new(big.Int).SetBytes(GetLastIPAddress(network))
-		// WHY DOES THIS NOT WORK?
-		return int(last.Sub(last, first).Uint64())
+		numHosts.Sub(numHosts, big.NewInt(2))
 	}
+	return int(numHosts.Int64())
 
 }
